@@ -10,13 +10,18 @@ input[type=text] {
 
 /* Set a style for all buttons */
 button {
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 100%;
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 /* Set a style for all textarea */
 textarea {
@@ -29,12 +34,14 @@ textarea {
 	background-color: #f8f8f8;
 	resize: none;
 }
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-	width: auto;
-	padding: 10px 18px;
-	background-color: #f44336;
+/*Send Button*/
+.send:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.send:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 /* Center the image and position the close button */
@@ -53,24 +60,20 @@ img.avatar {
 	padding: 16px;
 }
 
-span.psw {
-	float: right;
-	padding-top: 16px;
-}
 
 /* The Modal (background) */
 .modal {
 	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
+	position: absolute; /* Stay in place */
 	z-index: 0; /* Sit on top */
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
 	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
+	overflow: scroll; /* Enable scroll if needed */
 	background-color: rgb(0,0,0); /* Fallback color */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	padding-top: 60px;
+	padding-top: 10px;
 }
 
 /* Modal Content/Box */
@@ -113,13 +116,3 @@ span.psw {
 	to {transform: scale(1)}
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-	span.psw {
-		display: block;
-		float: none;
-	}
-	.cancelbtn {
-		width: 100%;
-	}
-}

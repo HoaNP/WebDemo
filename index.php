@@ -18,10 +18,11 @@
 				<a class="navbar-brand" href="#">Home</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Admin</a></li>				
+				<li class="active"><a href="admin.php">Admin</a></li>				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-envelope" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ></span></a></li>
+				<li class="active" onclick="document.getElementById('id01').style.display='block'" style="width:auto;""><a href="#">Contact</a></li>
+				<!-- <li><a href="#"><span class="glyphicon glyphicon-envelope" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ></span></a></li> -->
 				
 			</ul>
 		</div>
@@ -39,22 +40,23 @@
 			</div>
 
 			<div class="container">
+				<h1>Contact Us</h1>
 				<label><b>Name</b></label>
-				<input type="text" placeholder="Enter Name" name="uname" required>
+				<input type="text" placeholder="Please enter your name" name="uname" required>
 
 				<label><b>Email</b></label>
-				<input type="text" placeholder="Enter E-mail" name="email" required>
+				<input type="text" placeholder="Please enter your e-mail" name="email" required>
 
 				<label><b>Phone</b></label>
-				<input type="text" placeholder="Enter phone number" name="phone" required>
+				<input type="text" placeholder="Please enter phone number" name="phone">
 
 				<label><b>Content</b></label>
 				<br>
-				<!-- <input type="textarea" placeholder="Enter content" name="content"> -->
-				<textarea placeholder="Enter content" name="content" rows="4" cols="50"></textarea>
-				<br>
 
-				<button type="text">Send</button>				
+				<textarea placeholder="Please enter your content" name="content" rows="4" cols="50"></textarea>
+				<br><br>
+
+				<button class="button send">Send</button>				
 			</div>
 
 			
