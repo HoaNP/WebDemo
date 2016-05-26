@@ -38,7 +38,7 @@
 			<div class="container">
 				<h1>Contact Us</h1>
 				<label><b>Name</b></label>
-				<input type="text" placeholder="Please enter your name" name="uname" id="txt_name" required>	
+				<input type="text" placeholder="Please enter your name" name="name" id="txt_name" required>	
 				<label><b>Email</b></label>
 				<input type="text" placeholder="Please enter your e-mail" name="email" id = "txt_email" required>
 				<label><b>Phone</b></label>
