@@ -2,44 +2,63 @@
 <html>
 <head>
 	<title>Admin</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<?php
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "myDB";
-	function test_input($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-	// try {
-	// 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
- //    // set the PDO error mode to exception
-	// 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Content</th>
+			</tr>
+		</thead>
+		<?php
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "myDB";
 
- //    // sql to create table
-	// 	$sql = "CREATE TABLE INFO (
-	// 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-	// 	uname NVARCHAR(30) NOT NULL,
-	// 	email NVARCHAR(50) NOT NULL,
-	// 	phone NVARCHAR(50) NOT NULL,
-	// 	content NVARCHAR(500)
-	// 	)";
+// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
 
- //    // use exec() because no results are returned
-	// 	$conn->exec($sql);
-	// 	echo "Table INFO created successfully";
-	// }
-	// catch(PDOException $e)
-	// {
-	// 	echo $sql . "<br>" . $e->getMessage();
-	// }
-	$name = test_input($_POST["uname"]);
-	echo($name);
-	$conn = null;
-	?>
+		$sql = "SELECT * FROM info";
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+    // output data of each row
+			while($row = $result->fetch_assoc()) {
+				?>
+
+				<tbody>			
+					<tr>
+						<td><?php echo $row['id'];?></td>					
+						<td><?php echo $row['uname'];?></td>
+						<td><?php echo $row['email'];?></td>
+						<td><?php echo $row['phone'];?></td>
+						<td><?php echo $row['content'];?></td>
+					</tr>
+				</tbody>
+				
+				
+				<?php
+			}
+		} else {
+			echo "0 results";
+		}
+		$conn->close();
+		?>
+	</table>
 </body>
 </html>
