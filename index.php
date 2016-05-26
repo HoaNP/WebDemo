@@ -10,7 +10,6 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
 </head>
-
 <body>
 
 	<nav class="navbar navbar-inverse">
@@ -38,7 +37,7 @@
 			<div class="container">
 				<h1>Contact Us</h1>
 				<label><b>Name</b></label>
-				<input type="text" placeholder="Please enter your name" name="uname" id="txt_name" required>	
+				<input type="text" placeholder="Please enter your name" name="name" id="txt_name" required>					
 				<label><b>Email</b></label>
 				<input type="text" placeholder="Please enter your e-mail" name="email" id = "txt_email" required>
 				<label><b>Phone</b></label>
@@ -51,6 +50,29 @@
 			</div>
 		</form>
 	</div>
+	<form onload="myFunction()" style="margin:0;">
+
+		<div id="loader"></div>
+
+		<div style="display:none;" id="myDiv" class="animate-bottom">
+			<h2>Tada!</h2>
+			<p>Loading..</p>
+		</div>
+
+		<script>
+			var myVar;
+
+			function myFunction() {
+				myVar = setTimeout(showPage, 3000);
+			}
+
+			function showPage() {
+				document.getElementById("loader").style.display = "none";
+				document.getElementById("myDiv").style.display = "block";
+			}
+		</script>
+
+	</form>
 
 	<script>
 	// Get the modal
@@ -71,9 +93,9 @@
 			var name = $('#txt_name').val();
 			var email = $('#txt_email').val();
 			var phone = $('#txt_phone').val();
-			var comment =$('#txt_content').val();
-			var postData = "&name="+name+"&email="+email+"&phone="+phone+"&content="+comment;
-			if (name != '' && email != '' && phone != '' && comment != ''){
+			var content =$('#txt_content').val();
+			var postData = "&name="+name+"&email="+email+"&phone="+phone+"&content="+content;			
+			if (name != '' && email != '' && phone != '' && content != ''){
 				$.ajax({
 					url: "process.php",
 					type: "POST",
@@ -81,6 +103,7 @@
 				});
 
 			}
+
 
 			
 		}
