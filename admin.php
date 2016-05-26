@@ -43,15 +43,16 @@
 
 				<tbody>			
 					<tr>
-						<td><?php echo $row['id'];?></td>					
+						<td><?php echo $row['id'];
+						?></td>					
 						<td><?php echo $row['uname'];?></td>
 						<td><?php echo $row['email'];?></td>
 						<td><?php echo $row['phone'];?></td>
 						<td><?php echo $row['content'];?></td>
 					</tr>
 				</tbody>
-				
-				
+
+
 				<?php
 			}
 		} else {

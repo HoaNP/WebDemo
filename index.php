@@ -42,12 +42,12 @@
 				<label><b>Email</b></label>
 				<input type="text" placeholder="Please enter your e-mail" name="email" id = "txt_email" required>
 				<label><b>Phone</b></label>
-				<input type="text" placeholder="Please enter phone number" name="phone" id = "txt_phone">
+				<input type="text" placeholder="Please enter phone number" name="phone" id = "txt_phone" required>
 				<label><b>Content</b></label>
 				<br>
-				<textarea placeholder="Please enter your content" name="content" rows="4" cols="50" id = "txt_content"></textarea>
+				<textarea placeholder="Please enter your content" name="content" rows="4" cols="50" id = "txt_content" required></textarea>
 				<br><br>
-				<button class="button send" onclick="Send()">Send</button>			
+				<button class="btn" onclick="Send()">Send</button>
 			</div>
 		</form>
 	</div>
@@ -64,18 +64,25 @@
 			}
 		}
 	</script>
-	<script>		
-		function Send(){
+	<script>			
+		// When user clicks send button	
+		
+		function Send(){		
 			var name = $('#txt_name').val();
 			var email = $('#txt_email').val();
 			var phone = $('#txt_phone').val();
 			var comment =$('#txt_content').val();
 			var postData = "&name="+name+"&email="+email+"&phone="+phone+"&content="+comment;
-			$.ajax({
-				url: "process.php",
-				type: "POST",
-				data: postData
-			});
+			if (name != '' && email != '' && phone != '' && comment != ''){
+				$.ajax({
+					url: "process.php",
+					type: "POST",
+					data: postData
+				});
+
+			}
+
+			
 		}
 
 	</script>
