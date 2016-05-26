@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -21,45 +22,33 @@
 				<li class="active"><a href="admin.php">Admin</a></li>				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active" onclick="document.getElementById('id01').style.display='block'" style="width:auto;""><a href="#">Contact</a></li>
-				<!-- <li><a href="#"><span class="glyphicon glyphicon-envelope" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ></span></a></li> -->
-				
+				<li class="active" onclick="document.getElementById('id01').style.display='block'" style="width:auto;""><a href="#">Contact</a></li>			
 			</ul>
 		</div>
 	</nav>
 
-	<h2>Contact form</h2>
-
-	
 	<div id="id01" class="modal">
 
 		<form class="modal-content animate" action="">
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-				
+
 			</div>
 
 			<div class="container">
 				<h1>Contact Us</h1>
 				<label><b>Name</b></label>
-				<input type="text" placeholder="Please enter your name" name="uname" required>
-
+				<input type="text" placeholder="Please enter your name" name="uname" id="txt_name" required>	
 				<label><b>Email</b></label>
-				<input type="text" placeholder="Please enter your e-mail" name="email" required>
-
+				<input type="text" placeholder="Please enter your e-mail" name="email" id = "txt_email" required>
 				<label><b>Phone</b></label>
-				<input type="text" placeholder="Please enter phone number" name="phone">
-
+				<input type="text" placeholder="Please enter phone number" name="phone" id = "txt_phone">
 				<label><b>Content</b></label>
 				<br>
-
-				<textarea placeholder="Please enter your content" name="content" rows="4" cols="50"></textarea>
+				<textarea placeholder="Please enter your content" name="content" rows="4" cols="50" id = "txt_content"></textarea>
 				<br><br>
-
-				<button class="button send">Send</button>				
+				<button class="button send" onclick="Send()">Send</button>			
 			</div>
-
-			
 		</form>
 	</div>
 
@@ -67,13 +56,30 @@
 	// Get the modal
 	var modal = document.getElementById('id01');
 
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+
+			}
 		}
-	}
-</script>
+	</script>
+	<script>		
+		function Send(){
+			var name = $('#txt_name').val();
+			var email = $('#txt_email').val();
+			var phone = $('#txt_phone').val();
+			var comment =$('#txt_content').val();
+			var postData = "&name="+name+"&email="+email+"&phone="+phone+"&content="+comment;
+			$.ajax({
+				url: "process.php",
+				type: "POST",
+				data: postData
+			});
+		}
+
+	</script>
+
 
 </body>
 </html>
