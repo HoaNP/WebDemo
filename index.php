@@ -2,13 +2,13 @@
 <html>
 <head>
 	<title>Hello</title>
-	<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	
+		<script src="js/global.js"></script>	
 </head>
 <body>
 
@@ -58,57 +58,7 @@
 			<h2>Tada!</h2>
 			<p>Loading..</p>
 		</div>
-
-		<script>
-			var myVar;
-
-			function myFunction() {
-				myVar = setTimeout(showPage, 3000);
-			}
-
-			function showPage() {
-				document.getElementById("loader").style.display = "none";
-				document.getElementById("myDiv").style.display = "block";
-			}
-		</script>
-
 	</form>
-
-	<script>
-	// Get the modal
-	var modal = document.getElementById('id01');
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-
-			}
-		}
-	</script>
-	<script>			
-		// When user clicks send button	
-		
-		function Send(){		
-			var name = $('#txt_name').val();
-			var email = $('#txt_email').val();
-			var phone = $('#txt_phone').val();
-			var content =$('#txt_content').val();
-			var postData = "&name="+name+"&email="+email+"&phone="+phone+"&content="+content;			
-			if (name != '' && email != '' && phone != '' && content != ''){
-				$.ajax({
-					url: "process.php",
-					type: "POST",
-					data: postData
-				});
-
-			}
-
-
-			
-		}
-
-	</script>
 
 
 </body>

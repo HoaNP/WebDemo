@@ -2,61 +2,47 @@
 <html>
 <head>
 	<title>Admin</title>
-
-	<style>
-		table { 
-			color: #333;
-			font-family: Helvetica, Arial, sans-serif;
-			width: 1300px; 
-			border-collapse: 
-			collapse; border-spacing: 0; 
-		}
-
-		td, th { 
-			border: 1px solid transparent; /* No more visible border */
-			height: 40px; 
-			transition: all 0.3s;  /* Simple transition for hover effect */
-		}
-
-		th {
-			background: #DFDFDF;  /* Darken header a bit */
-			font-weight: bold;
-			text-align: center;
-		}
-
-		td {
-			background: #FAFAFA;
-			text-align: center;
-		}
-
-		/* Cells in even rows (2,4,6...) are one color */ 
-		tr:nth-child(even) td { background: #F1F1F1; }   
-
-		/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */ 
-		tr:nth-child(odd) td { background: #FEFEFE; }  
-
-		tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/admin.css">	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="js/global.js"></script>
 </head>
 <body>
 	
 	<?php
-	include "config.php";
+	include "db/config.php";
 	$sql    = "SELECT * FROM mydata";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
-		echo "<table style='border: solid 1px black;'><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Content</th></tr>";
+		?>
+		<table style='border: solid 1px black;' id ="myTable">
+		<?php 
+		echo "<div id=\"msgDsp\" STYLE=\"position: absolute; right: 0px; top: 10px;left:800px;text-align:left; FONT-SIZE: 12px;font-family: Verdana;border-style: solid;border-width: 1px;border-color:white;padding:0px;height:20px;width:250px;top:10px;z-index:1\"> Edit mark </div><br><br>";
+		 echo "<tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Content</th><th>Action</th></tr>";
     // output data of each row
 		while ($row = $result->fetch_assoc()) {
-			echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["phone"] . "</td><td>" . $row["content"] . "</td></tr>";
+		
+			
+			?>
+			<td class = "c_id"><?php echo $row["id"];?></td>
+			<td class = "c_Name"><?php echo $row["name"];?></td>
+			<td class = "c_Email"><?php echo $row["email"];?></td>
+			<td class = "c_Phone"><?php echo $row["phone"];?></td>
+			<td class = "c_Content"><?php echo $row["content"];?><td>
+			
+			<a class="editable" href="#">Edit</a> <a class="edit" href="#">Delete</a>
+			<?php 
+			echo "</></tr>";
 		}
-		echo "</table>";
+		?>
+
+		</table>
+		<?php
 	} else {
 		echo "0 results";
 	}
 	$conn->close();
 	?>
-
+	
 
 </body>
 </html>
