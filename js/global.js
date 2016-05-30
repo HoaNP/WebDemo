@@ -80,7 +80,7 @@ $(function(){
      	}
      });
 	$(".edit").click(function(e){ 
-		var r = confirm("Do you really want to delete it?");
+		var r = confirm("Do you want to Delete This Record?");
 		if (r == true){
 			var $row = $(this).closest("tr"); 
 			ceil1 =  $row.find(".c_id");
@@ -99,6 +99,11 @@ $(function(){
 			
 		}
 
+	});
+	$(".btn").click(function(){
+		//alert("Hoa");
+		//$id = 10;
+		//$("<tr><td>"+$id+"Stuff</td></tr>").insertBefore('table > tbody > tr:first');
 	});
 
 });
