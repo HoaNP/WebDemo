@@ -79,7 +79,27 @@ $(function(){
      		}	
      	}
      });
-	
+	$(".edit").click(function(e){ 
+		var r = confirm("Do you really want to delete it?");
+		if (r == true){
+			var $row = $(this).closest("tr"); 
+			ceil1 =  $row.find(".c_id");
+    		var to = ceil1.text();
+    		//alert(to);
+    		var postData = "&id="+to+"&name="+$('#inp0').val()+"&email="+$('#inp1').val()+"&phone="+$('#inp2').val()+"&content="+$('#inp3').val();	
+    		//var $ele = $(this).parent().parent();
+    		//alert(postData);
+    		$.ajax({
+    			url: "del.php",
+    			type: "POST",
+    			cache: false,
+    			data: postData    		
+    		});
+    		$row.fadeOut().remove();
+			
+		}
+
+	});
 
 });
 
