@@ -13,6 +13,20 @@ input{
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 }
+input:hover{
+	background-color: white;
+	color: black;
+}
+
+input.invalid{
+	border-color: #FF0000;
+	background-color: #FFAAAA;
+}
+
+input.valid{
+	border-color: #00FF00;
+	background-color: #AAFFAA;
+}
 
 td, th { 
 	border: 1px solid transparent; /* No more visible border */

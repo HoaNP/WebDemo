@@ -21,7 +21,7 @@
 				<li class="active"><a href="admin.php">Admin</a></li>				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active" onclick="document.getElementById('id01').style.display='block'" style="width:auto;""><a href="#">Contact</a></li>			
+				<li class="act" style="width:auto;""><a href="#">Contact</a></li>			
 			</ul>
 		</div>
 	</nav>
