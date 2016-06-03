@@ -8,13 +8,24 @@ $content = $_POST['content'];
 	$message=''; // 
 $status='success';              // Set the flag  
 $sql = "INSERT INTO mydata (name, email, phone, content) VALUES ('$name','$email','$phone','$content');";
-	if(!preg_match("/^[a-zA-Z ]*$/",$name) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/^[0-9 ]*$/",$phone)){ // checking data
-		$message= "Data Error";
+	if(!preg_match("/^[a-zA-Z ]*$/",$name)){
+		$status='Failed';
+		$message = "Only letters and white space allowed";
+	} 
+	if( !filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$status='Failed';
+		$message = "Invalid email format";		
+	} 
+	if( !preg_match("/^[0-9 ]*$/",$phone)){ // checking data
+		$message= "Only numbers allowed";
 		$status='Failed';
 	}
 	
-	if ($status == 'Failed'){		
+	if ($status == 'Failed'){	
+				
+		http_response_code(404);
 		die($message);
+
 	}
 	else {
 		if ($conn->query($sql) === TRUE) {

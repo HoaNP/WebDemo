@@ -1,9 +1,11 @@
 $(function(){
+	// funtion for Edit => Update
 	$(".editable").click(function(e){        	
 		var $this = $(this);
 		var text = $this.text();
 		var i, ceil1, text1, s, t;
 		t = new Array("c_Name", "c_Email", "c_Phone","c_Content");
+		
 		if(text=="Edit"){
 			$this.text("Update");
 			var $row = $(this).closest("tr");    // Find the row
@@ -14,8 +16,6 @@ $(function(){
      			text1 =ceil1.text(); // Find the text
      			ceil1.replaceWith("<td><input class = '"+ t[i]+ "' value='" + text1 + "' id = inp"+ i+" /></td>");	
      		}	
-
-
      	}
      	else{
      		$this.text("Edit");
@@ -41,6 +41,7 @@ $(function(){
      		}	
      	}		
      });
+	// Funtion for Delete data
 	$(".edit").click(function(e){ 
 		var r = confirm("Do you want to Delete This Record?");
 		if (r == true){
@@ -58,46 +59,48 @@ $(function(){
     			data: postData
     		});
     		$row.fadeOut().remove();
-
     	}
 
     });
-
+    // Remove div notif error
+    function remove(){
+    	$('#error_name').fadeOut().remove();
+    	$('#error_email').fadeOut().remove();
+    	$('#error_phone').fadeOut().remove();
+    	$('#error_content').fadeOut().remove();
+    }
+    var d = new Array("name", "email", "phone","content");
+	// Funtion for button send
 	$(".btn").click(function(){
 		//alert(error_element);
 		var s ="";
-		if (!check($('#txt_name'),re[0])) {	
-			s += error_name + "\n";
-		}
-		if (!check($('#txt_email'),re[1])) {
-			s += error_email + "\n";
-		}
-		if (!check($('#txt_phone'),re[2])) {
-			s += error_phone + "\n";
-		}
+		remove();
+		for (var i = 0; i < 3; i++) {
+			if (!check($('#txt_'+d[i]), re[i])){
+				$('#txt_' + d[i]).after("<div id='error_" +d[i] +"'>"+err[i]+'</div>');
+				return false;	
+			}
+			
+		}		
 		if ($('#txt_content').val() == ""){
-			s+=error_content + "\n";
+			$('#txt_content').after('<div id ="error_content">'+err[3]+'</div>');
+			return false;
+		}		
+		Send();						
+		return false;		
+	});
+	function check_err_server(s){
+		remove();
+		for(var i = 0; i < 4; i++){
+			if (s == err[i]){
+				$('#txt_' + d[i]).after("<div id='error_" +d[i] +"'>"+err[i]+'</div>');
+				return false;	
+			}
 		}
-		if(s != ""){
-			alert(s);	
-			
-		}
-		else {
-			Send();					
-			//modal.style.display = "none";
-			//return true;
-			
-		}
-				//alert(s);
-				return false;		
-
-			});
-	var error_name, error_email, error_phone;
-	error_name = "Only letters and white space allowed";
-	error_email = "Invalid email format";
-	error_phone = "Only numbers allowed";
-	error_content = "Content is not allowed to be empty"
-	re = Array( /^[a-zA-Z ]*$/, /^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/, /^[0-9]*$/);
+	}
+	var err;
+	err= Array('Only letters and white space allowed', "Invalid email format", "Only numbers allowed", "Content is not allowed to be empty");
+	re = Array( /^[^\W]*$/, /^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/, /^[0-9]*$/);
 	$(".btnadd").click(function(){
 		modal.modal('toggle');
 		//Send();
@@ -111,7 +114,7 @@ $(function(){
 		}
 		else{
 			input.removeClass("valid").addClass("invalid");
-			alert(error_name);
+			//alert(err[0]);
 		}
 	});
 
@@ -135,30 +138,34 @@ $(function(){
 		}
 		else{
 			input.removeClass("valid").addClass("invalid");
-			alert(error_phone);
+			//alert(error_phone);
 		}
 	});
+	// check input
 	function check(input, re){
 		var is_smt = re.test(input.val());
 		if(input.val() == "") return 0;
 		return(is_smt);
 	}
 	var modal = $('#id01');
+	$('.close').click(function(){
+		$('#id01').modal('hide');
+	});
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 		if (event.target == modal) {
-			modal.style.display = "none";
+			$('#id01').modal('hide');
 		}
 	}
-	
+	//click contact ind indec.php
 	$(".act").click(function(){
 		modal.modal('toggle');
 	});				
-	// When user clicks send button	
 	function mov(){
 		$('#myTable tr:last').insertBefore('table > tbody > tr:first');
 	}
+	// When user clicks send button	
 	function Send() {				
 		var name = $('#txt_name').val();
 		var email = $('#txt_email').val();
@@ -172,31 +179,29 @@ $(function(){
 				data: postData
 			})
 			.done(function(response){
-				if (response == "Data Error"){
-					alert("Data Error");
-
-				}
-				else{
-					var t = JSON.parse(response);
-
+				
+				var t = JSON.parse(response);
 					// Step 1: Get variable data from reponse 
 					// Step 2: Write HTML code
-					var html_content = "<td class = 'c_id'>" + t.id + 
+					var html_content = "<tr><td class = 'c_id'>" + t.id + 
 					"</td><td class = 'c_Name'>" + t.name +
 					"</td><td class = 'c_Email'>" + t.email +
 					"</td><td class = 'c_Phone'>" + t.phone +
 					"</td><td class = 'c_Content'>" + t.content +
 					"</td><td><a class='editable' href='#'>Edit</a> <a class='edit' href='#'>Delete</a></td></tr>";
 					//var $row = document.createElement(html_content);
-					$(html_content).insertBefore('table > tbody > tr:first');				
+					//$(html_content).insertBefore('table > tbody');
+					$("#myTable tbody").prepend(html_content);				
 					$('#id01').modal('hide');
-					//modal.modal('toggle');			
-				}
-
-
-			})
-			.fail(function(){
-				alert("fail");			
+					//modal.modal('toggle');
+				})
+			.fail(function(jqXHR, textStatus, errorThrown){				
+				// console.log(jqXHR);
+				// console.log(textStatus);
+				// console.log(errorThrown);
+				check_err_server(jqXHR.responseText);
+				//alert(jqXHR.responseText);
+				//alert("Fail");			
 			});
 		}		
 	}

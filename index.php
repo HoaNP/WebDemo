@@ -30,7 +30,7 @@
 
 		<form class="modal-content animate" action="">
 			<div class="imgcontainer">
-				<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+				<span class="close" title="Close Modal">&times;</span>
 
 			</div>
 
@@ -46,7 +46,7 @@
 				<br>
 				<textarea placeholder="Please enter your content" name="content" rows="4" cols="50" id = "txt_content" required></textarea>
 				<br><br>
-				<button class="btn" onclick="Send()">Send</button>
+				<button class="btn">Send</button>
 			</div>
 		</form>
 	</div>
